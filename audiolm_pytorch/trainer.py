@@ -398,7 +398,7 @@ class SoundStreamTrainer(nn.Module):
 
         # save model every so often
 
-        if self.is_main and not (steps % self.save_model_every):
+        if self.is_main and (not (steps % self.save_model_every) or steps % 10 == 0):
             state_dict = self.soundstream.state_dict()
             model_path = str(self.results_folder / f'soundstream.{steps}.pt')
             torch.save(state_dict, model_path)
